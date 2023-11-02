@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "867966760192",
+    "project_id": "tam-auth",
+    "storage_bucket": "tam-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:867966760192:android:8cb6af0a759baecb2c6fe5",
+        "android_client_info": {
+          "package_name": "com.example.tam_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXIsHaRvzixdU7UG4DPjPx1rbB2zLBqaM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
