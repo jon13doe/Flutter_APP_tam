@@ -139,7 +139,9 @@ class Models extends StatelessWidget {
             ),
           ),
         ),
-        const ContactsRow(),
+        const SliverToBoxAdapter(
+              child: ContactsRow(withImg: true,),
+            ),
       ],
     );
   }

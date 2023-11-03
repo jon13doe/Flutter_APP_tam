@@ -1,6 +1,6 @@
 import 'package:tam_app/global_imports.dart';
-import 'parts/authentication.dart';
-import 'parts/account.dart';
+import 'authentication_view/authentication.dart';
+import 'account_view/account.dart';
 
 class AccountWindow extends StatefulWidget {
   const AccountWindow({Key? key}) : super(key: key);

@@ -57,7 +57,9 @@ class _ShowState extends State<Show> {
                 ),
               ),
             ),
-            const ContactsRow(),
+            const SliverToBoxAdapter(
+              child: ContactsRow(withImg: true,),
+            ),
           ],
         );
       },

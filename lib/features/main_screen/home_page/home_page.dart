@@ -55,7 +55,9 @@ class _HomeState extends State<Home> {
             );
           },
         ),
-        const ContactsRow(),
+        const SliverToBoxAdapter(
+              child: ContactsRow(withImg: true,),
+            ),
       ],
     );
   }
