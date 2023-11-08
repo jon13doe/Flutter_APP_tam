@@ -17,7 +17,7 @@ class _HomeState extends State<Home> {
       slivers: [
         const SliverToBoxAdapter(
           child: SizedBox(
-            height: 16,
+            height: 8,
           ),
         ),
         Consumer<DataList>(
@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
         ),
         const SliverToBoxAdapter(
           child: SizedBox(
-            height: 16,
+            height: 8,
           ),
         ),
         SliverToBoxAdapter(

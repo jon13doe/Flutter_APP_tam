@@ -14,25 +14,36 @@ class _EventsViewState extends State<EventsView> {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: SizedBox(
-        height: MediaQuery.of(context).size.width,
+        height: 0.9 * MediaQuery.of(context).size.width,
         child: CustomScrollView(
           scrollDirection: Axis.horizontal,
           slivers: [
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
-                  double screenWidth = MediaQuery.of(context).size.width;
+                  double screenWidth = 0.9 * MediaQuery.of(context).size.width;
                   return Padding(
-                    padding: const EdgeInsets.only(left: 16.0),
+                    padding: const EdgeInsets.only(left: 8.0),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialogForEvents(
+                              text: widget.eventsList[index].text,
+                              title: widget.eventsList[index].name,
+                            );
+                          },
+                        );
+                      },
                       child: Stack(
                         children: [
                           Container(
                             color: Colors.grey,
                             width: screenWidth,
                             child: Center(
-                              child: Image.network(widget.eventsList[index].imageUrl),
+                              child: Image.network(
+                                  widget.eventsList[index].imageUrl),
                             ),
                           ),
                           TitleDataLabel(

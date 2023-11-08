@@ -2,21 +2,18 @@ import 'package:tam_app/global_imports.dart';
 import 'widgets/index.dart';
 
 class Authentication extends StatefulWidget {
-  final Function(bool) onPush;
-
-  const Authentication({super.key, required this.onPush});
+  const Authentication({
+    super.key,
+  });
 
   @override
   State<Authentication> createState() => _AuthenticationState();
 }
 
 class _AuthenticationState extends State<Authentication> {
-  bool signInUp = true;
-  void toggleSignInUp(bool newValue) {
-    setState(() {
-      signInUp = newValue;
-    });
-  }
+  bool signIn = true;
+  bool signUp = false;
+  bool verifyScreen = false;
 
   @override
   Widget build(BuildContext context) {
@@ -26,23 +23,51 @@ class _AuthenticationState extends State<Authentication> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              InkWell(
-                child: const JoinText(),
-                onTap: () {
-                  setState(() {
-                    widget.onPush(true);
-                  });
-                },
+              const JoinText(),
+              Visibility(
+                visible: signIn,
+                child: SignIn(
+                  onPush: (bool newValue) {
+                    setState(() {
+                      signIn = !newValue;
+                      signUp = newValue;
+                    });
+                  },
+                ),
               ),
               Visibility(
-                visible: signInUp ? false : true,
-                child: SignUp(onPush: toggleSignInUp),
+                visible: signUp,
+                child: SignUp(
+                  onPush: (bool newValue) {
+                    setState(() {
+                      signUp = !newValue;
+                      signIn = newValue;
+                    });
+                  },
+                  onPushSignUp: (bool newValue) {
+                    setState(() {
+                      signIn = !newValue;
+                      signUp = !newValue;
+                      verifyScreen = newValue;
+                    });
+                  },
+                ),
               ),
               Visibility(
-                visible: signInUp,
-                child: SignIn(onPush: toggleSignInUp),
+                visible: verifyScreen,
+                child: VerifyEmailScreen(
+                  onPush: (bool newValue) {
+                    setState(() {
+                      signIn = newValue;
+                      signUp = !newValue;
+                      verifyScreen = !newValue;
+                    });
+                  },
+                ),
               ),
-                      const ContactsRow(withImg: false,),
+              const ContactsRow(
+                withImg: false,
+              ),
             ],
           ),
         ),

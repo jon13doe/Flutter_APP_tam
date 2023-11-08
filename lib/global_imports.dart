@@ -38,4 +38,6 @@ export 'package:tam_app/features/widgets/index.dart';
 export 'package:provider/provider.dart';
 
 // data
-export 'package:tam_app/parsed_data.dart';
+export 'package:tam_app/features/clases/parsed_data_class.dart';
+
+export 'package:firebase_auth/firebase_auth.dart';

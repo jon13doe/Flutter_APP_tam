@@ -16,9 +16,9 @@ class TitleDataLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Positioned(
       left: side == 'left' ? 0 : null,
-      top: side == 'left' ? 20 : null,
+      top: side == 'left' ? 10 : null,
       right: side == 'right' ? 0 : null,
-      bottom: side == 'right' ? 20 : null,
+      bottom: side == 'right' ? 10 : null,
       child: ConstrainedBox(
         constraints: BoxConstraints(
           maxWidth: customWidth,
@@ -42,7 +42,7 @@ class TitleDataLabel extends StatelessWidget {
             child: Text(
               title,
               style: const TextStyle(
-                fontSize: 32,
+                fontSize: 24,
                 color: Colors.black,
               ),
               maxLines: 2,

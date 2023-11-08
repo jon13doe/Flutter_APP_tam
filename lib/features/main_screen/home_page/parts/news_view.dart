@@ -20,7 +20,16 @@ class _NewsViewState extends State<NewsView> {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialogForEvents(
+                      text: widget.newsList[index].text,
+                    );
+                  },
+                );
+              },
               child: Stack(
                 children: [
                   Container(

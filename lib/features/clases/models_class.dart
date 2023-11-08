@@ -11,7 +11,6 @@ class ModelsClass {
   final String shoeSize;
   final String mainPhotoUrl;
   final List<String> portfolioPhotoUrl;
-  final List<String> otherPhotoUrl;
 
   ModelsClass({
     required this.name,
@@ -26,15 +25,11 @@ class ModelsClass {
     required this.shoeSize,
     required this.mainPhotoUrl,
     required this.portfolioPhotoUrl,
-    required this.otherPhotoUrl,
   });
 
   factory ModelsClass.fromJson(Map<String, dynamic> json) {
     final portfolioPhotoString = json['portfolio_photo'] as String;
-  final otherPhotoString = json['other_photo'] as String;
-
-  final portfolioPhotoList = portfolioPhotoString.split(', ');
-  final otherPhotoList = otherPhotoString.split(', ');
+    final portfolioPhotoList = portfolioPhotoString.split(', ');
 
     return ModelsClass(
       name: json['name'] as String,
@@ -49,7 +44,6 @@ class ModelsClass {
       shoeSize: json['shoe_size'] as String,
       mainPhotoUrl: json['main_photo'] as String,
       portfolioPhotoUrl: portfolioPhotoList,
-      otherPhotoUrl: otherPhotoList,
     );
   }
 }

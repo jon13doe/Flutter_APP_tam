@@ -10,17 +10,12 @@ class AccountWindow extends StatefulWidget {
 }
 
 class _AccountWindowState extends State<AccountWindow> {
-  bool authentication = false;
-  void toggleAuthentication(bool newValue) {
-    setState(() {
-      authentication = newValue;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return authentication
-        ? Account(onPush: toggleAuthentication)
-        : Authentication(onPush: toggleAuthentication);
+    return Consumer<UserProvider>(
+      builder: (context, userProvider, child) {
+        return userProvider.isLogin ? const Account() : const Authentication();
+      },
+    );
   }
 }

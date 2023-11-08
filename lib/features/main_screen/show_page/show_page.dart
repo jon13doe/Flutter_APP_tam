@@ -28,7 +28,17 @@ class _ShowState extends State<Show> {
                         vertical: 8,
                       ),
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialogForEvents(
+                      text: showsList[index].text,
+                      title: showsList[index].name,
+                    );
+                  },
+                );
+              },
                         child: Stack(
                           children: [
                             Container(

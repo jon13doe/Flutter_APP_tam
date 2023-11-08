@@ -5,17 +5,33 @@ import 'package:tam_app/global_imports.dart';
 class SignIn extends StatefulWidget {
   final Function(bool) onPush;
 
-  const SignIn({super.key, required this.onPush});
+  const SignIn({
+    super.key,
+    required this.onPush,
+  });
 
   @override
   State<SignIn> createState() => _SignInState();
 }
 
+void showErrorDialog(
+  BuildContext context,
+  String errorMessage,
+) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialogWithTimer(
+        text: errorMessage,
+      );
+    },
+  );
+}
+
 class _SignInState extends State<SignIn> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   bool obscureText = true;
-  bool rememberMe = false;
 
   @override
   Widget build(BuildContext context) {
@@ -45,18 +61,30 @@ class _SignInState extends State<SignIn> {
                       ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          widget.onPush(false);
+                          widget.onPush(true);
                         },
                     ),
                   ],
                 ),
               ),
-              TextField(
-                controller: emailController,
+              TextFormField(
+                controller: _emailController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your email';
+                  }
+                  return null;
+                },
                 decoration: const InputDecoration(labelText: 'Email'),
               ),
-              TextField(
-                controller: passwordController,
+              TextFormField(
+                controller: _passwordController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your email';
+                  }
+                  return null;
+                },
                 decoration: InputDecoration(
                   labelText: 'Password',
                   suffixIcon: IconButton(
@@ -73,31 +101,61 @@ class _SignInState extends State<SignIn> {
                 ),
                 obscureText: obscureText,
               ),
-              Row(
-                children: [
-                  Checkbox(
-                    value: rememberMe,
-                    onChanged: (value) {
-                      setState(() {
-                        rememberMe = value ?? false;
-                      });
-                    },
-                  ),
-                  const Text('Remember me'),
-                ],
+              // Row(
+              //   children: [
+              //     Checkbox(
+              //       value: Provider.of<UserProvider>(context)
+              //           .userInformation['stayLogin'],
+              //       onChanged: (value) {
+              //         Provider.of<UserProvider>(context, listen: false)
+              //             .setstayLogin(value!);
+              //       },
+              //     ),
+              //     const Text('Remember me'),
+              //   ],
+              // ),
+              const SizedBox(
+                height: 32,
               ),
             ],
           ),
         ),
-        const LoginButton(
-          text: 'Sign in',
+         InkWell(
+          onTap: () async {
+            String email = _emailController.text;
+            String password = _passwordController.text;
+
+            try {
+              await Auth().signInWithEmailAndPassword(email, password);
+
+              FirebaseAuth.instance.authStateChanges().listen((User? user) {
+                if (user != null) {
+                  Provider.of<UserProvider>(context, listen: false).setIsLogin(true);
+                  Provider.of<UserProvider>(context, listen: false).setEmail(email);
+                  setState(() {
+                    widget.onPush(false); // Відновіть відображення Account відразу після входу
+                  });
+                }
+              });
+            } on FirebaseAuthException catch (e) {
+              if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+                showErrorDialog(context, 'Incorrect email or password.');
+              }
+            }
+          },
+          child: const LoginButton(
+            text: 'Sign in',
+          ),
         ),
         const SizedBox(
           height: 16,
         ),
-        const LoginButton(
-          text: 'Sign in with Google',
-          loginIco: FontAwesomeIcons.google,
+        InkWell(
+          onTap: () {},
+          child: const LoginButton(
+            text: 'Sign in with Google',
+            loginIco: FontAwesomeIcons.google,
+          ),
         ),
         const SizedBox(
           height: 16,
@@ -115,7 +173,7 @@ class _SignInState extends State<SignIn> {
                 ),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    widget.onPush(false);
+                    widget.onPush(true);
                   },
               ),
             ],

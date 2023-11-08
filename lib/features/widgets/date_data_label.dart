@@ -12,7 +12,7 @@ class DateDataLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Positioned(
       right: 0,
-      bottom: 20,
+      bottom: 10,
       child: Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
