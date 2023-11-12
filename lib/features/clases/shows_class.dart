@@ -1,22 +1,34 @@
 class ShowsClass {
-  String date;
-  String name;
-  String text;
-  String imageUrl;
+  final String title;
+  final String date;
+  final String text;
+  final String mainImageUrl;
+  final List<String>? otherImagesUrls;
 
   ShowsClass({
+    required this.title,
     required this.date,
-    required this.name,
     required this.text,
-    required this.imageUrl,
+    required this.mainImageUrl,
+    this.otherImagesUrls,
   });
 
-  factory ShowsClass.fromJson(dynamic json) {
+  factory ShowsClass.fromJson(Map<String, dynamic> json) {
+    List<String>? otherImagesUrlsList;
+
+    if (json['other_photo'] != null) {
+      final otherImagesUrlsString = json['other_photo'] as String;
+      otherImagesUrlsList = otherImagesUrlsString.split(', ');
+    } else {
+      otherImagesUrlsList = null;
+    }
+
     return ShowsClass(
-      date: '${json['date']}',
-      name: '${json['name']}',
-      text: '${json['text']})',
-      imageUrl: '${json['main_photo']}',
+      title: json['title'],
+      date: json['date'],
+      text: json['text'],
+      mainImageUrl: json['main_photo'],
+      otherImagesUrls: otherImagesUrlsList,
     );
   }
 }

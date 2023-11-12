@@ -1,16 +1,16 @@
 import 'package:tam_app/global_imports.dart';
 
-class Show extends StatefulWidget {
-  const Show({super.key});
+class Shows extends StatefulWidget {
+  const Shows({super.key});
 
   @override
-  State<Show> createState() => _ShowState();
+  State<Shows> createState() => _ShowsState();
 }
 
-class _ShowState extends State<Show> {
+class _ShowsState extends State<Shows> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<DataList>(
+    return Consumer<DataFromSheet>(
       builder: (context, dataList, child) {
         final showsList = dataList.shows;
         double screenWidth = MediaQuery.of(context).size.width;
@@ -29,29 +29,30 @@ class _ShowState extends State<Show> {
                       ),
                       child: InkWell(
                         onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialogForEvents(
-                      text: showsList[index].text,
-                      title: showsList[index].name,
-                    );
-                  },
-                );
-              },
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialogForEvents(
+                                text: showsList[index].text,
+                                title: showsList[index].title,
+                                photoUrls: showsList[index].otherImagesUrls,
+                              );
+                            },
+                          );
+                        },
                         child: Stack(
                           children: [
                             Container(
                               height: screenWidth,
-                              color: Colors.grey,
+                              color: Colors.black,
                               child: Center(
                                 child: Image.network(
-                                  showsList[index].imageUrl,
+                                  showsList[index].mainImageUrl,
                                 ),
                               ),
                             ),
                             TitleDataLabel(
-                              title: showsList[index].name,
+                              title: showsList[index].title,
                               side: 'left',
                               customWidth: 0.75 * screenWidth,
                             ),
@@ -68,7 +69,9 @@ class _ShowState extends State<Show> {
               ),
             ),
             const SliverToBoxAdapter(
-              child: ContactsRow(withImg: true,),
+              child: ContactsRow(
+                withImg: true,
+              ),
             ),
           ],
         );

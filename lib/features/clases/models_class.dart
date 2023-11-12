@@ -2,13 +2,10 @@ class ModelsClass {
   final String name;
   final String nameKr;
   final String dateOfBirth;
-  final String gender;
-  final String height;
-  final String weight;
+  final int height;
+  final int weight;
   final String hairColor;
   final String eyeColor;
-  final String clothingSize;
-  final String shoeSize;
   final String mainPhotoUrl;
   final List<String> portfolioPhotoUrl;
 
@@ -16,13 +13,10 @@ class ModelsClass {
     required this.name,
     required this.nameKr,
     required this.dateOfBirth,
-    required this.gender,
     required this.height,
     required this.weight,
     required this.hairColor,
     required this.eyeColor,
-    required this.clothingSize,
-    required this.shoeSize,
     required this.mainPhotoUrl,
     required this.portfolioPhotoUrl,
   });
@@ -32,17 +26,14 @@ class ModelsClass {
     final portfolioPhotoList = portfolioPhotoString.split(', ');
 
     return ModelsClass(
-      name: json['name'] as String,
-      nameKr: json['name_kyr'] as String,
-      dateOfBirth: json['date_of_birth'] as String,
-      gender: json['gender'] as String,
-      height: json['height_cm'] as String,
-      weight: json['weight_kg'] as String,
-      hairColor: json['hair_color'] as String,
-      eyeColor: json['eye_color'] as String,
-      clothingSize: json['clothing_size'] as String,
-      shoeSize: json['shoe_size'] as String,
-      mainPhotoUrl: json['main_photo'] as String,
+      name: json['name'],
+      nameKr: json['name_kyr'],
+      dateOfBirth: json['date_of_birth'],
+      height: json['height_cm']?? 0,
+      weight: json['weight_kg'] ?? 0,
+      hairColor: json['hair_color'] ?? '',
+      eyeColor: json['eye_color'] ?? '',
+      mainPhotoUrl: json['main_photo'],
       portfolioPhotoUrl: portfolioPhotoList,
     );
   }

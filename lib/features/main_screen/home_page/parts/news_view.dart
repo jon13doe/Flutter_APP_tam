@@ -15,7 +15,7 @@ class _NewsViewState extends State<NewsView> {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
-          Color color = index % 2 == 0 ? Colors.black : Colors.grey;
+          Color color = Colors.black;
           double screenWidth = MediaQuery.of(context).size.width;
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -36,11 +36,11 @@ class _NewsViewState extends State<NewsView> {
                     color: color,
                     height: screenWidth,
                     child: Center(
-                      child: Image.network(widget.newsList[index].imageUrl),
+                      child: Image.network(widget.newsList[index].mainImageUrl),
                     ),
                   ),
                   TitleDataLabel(
-                    title: widget.newsList[index].name,
+                    title: widget.newsList[index].title,
                     side: 'right',
                     customWidth: 0.75 * screenWidth,
                   ),

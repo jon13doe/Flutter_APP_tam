@@ -1,14 +1,14 @@
 import 'package:tam_app/global_imports.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
-class Casting extends StatefulWidget {
-  const Casting({super.key});
+class School extends StatefulWidget {
+  const School({super.key});
 
   @override
-  State<Casting> createState() => _CastingState();
+  State<School> createState() => _SchoolState();
 }
 
-class _CastingState extends State<Casting> {
+class _SchoolState extends State<School> {
   late InAppWebViewController controller;
   String url = 'https://docs.google.com/forms/d/e/1FAIpQLSfAHVJicMArSZ5DLDMtyYxFqMPWvLdGKKtYNtPwsa2Zhi7pRw/viewform';
   double progress = 0;
@@ -16,11 +16,6 @@ class _CastingState extends State<Casting> {
 
   @override
   Widget build(BuildContext context) {
-    // if (progress == 1) {
-    //   setState(() {
-    //     loadingBarVisiability = false;
-    //   });
-    // }
     
     return Scaffold(
       body: SafeArea(
@@ -28,17 +23,6 @@ class _CastingState extends State<Casting> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Visibility(
-            //   visible: loadingBarVisiability,
-            //   child: Container(
-            //     padding: const EdgeInsets.all(8),
-            //     child: progress < 1.0
-            //         ? LinearProgressIndicator(
-            //             value: progress,
-            //           )
-            //         : Container(),
-            //   ),
-            // ),
             Expanded(
               child: InAppWebView(
                 initialUrlRequest: URLRequest(

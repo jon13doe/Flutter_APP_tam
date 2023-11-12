@@ -3,11 +3,8 @@ import 'package:tam_app/global_imports.dart';
 import 'package:tam_app/features/title_screen/index.dart';
 import 'package:tam_app/features/main_screen/home_page/index.dart';
 import 'package:tam_app/features/main_screen/models_page/index.dart';
-import 'package:tam_app/features/main_screen/show_page/index.dart';
-import 'package:tam_app/features/main_screen/casting_page/index.dart';
-
-import 'package:tam_app/features/main_screen/account_window/index.dart';
-
+import 'package:tam_app/features/main_screen/shows_page/index.dart';
+import 'package:tam_app/features/main_screen/school_page/index.dart';
 import 'package:tam_app/features/main_screen/app_bar/index.dart';
 import 'package:tam_app/features/main_screen/navigation_bar/index.dart';
 
@@ -44,27 +41,21 @@ final GoRouter router = GoRouter(
           },
           routes: [
             GoRoute(
+              path: 'shows',
+              builder: (context, state) {
+                return const Shows();
+              },
+            ),
+            GoRoute(
               path: 'models',
               builder: (context, state) {
                 return const Models();
               },
             ),
             GoRoute(
-              path: 'show',
+              path: 'school',
               builder: (context, state) {
-                return const Show();
-              },
-            ),
-            GoRoute(
-              path: 'casting',
-              builder: (context, state) {
-                return const Casting();
-              },
-            ),
-            GoRoute(
-              path: 'account',
-              builder: (context, state) {
-                return const AccountWindow();
+                return const School();
               },
             ),
           ],

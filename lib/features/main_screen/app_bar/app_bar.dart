@@ -1,7 +1,8 @@
 import 'package:tam_app/global_imports.dart';
 
 class TAMAppBar extends StatelessWidget implements PreferredSizeWidget {
-const TAMAppBar({super.key});
+  const TAMAppBar({super.key});
+  
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
@@ -20,14 +21,6 @@ const TAMAppBar({super.key});
           ),
         ),
       ),
-      actions: [
-        IconButton(
-          onPressed: () {
-            if (GoRouter.of(context).location != '/account') {context.push('/account');}
-          },
-          icon: const Icon(Icons.account_circle),
-        ),
-      ],
     );
   }
 }

@@ -4,7 +4,8 @@ import 'package:http/http.dart' as http;
 
 class SheetDataApi {
   static Future<Map<String, List<dynamic>>> fetchDataFromGoogleScript() async {
-    final response = await http.get(Uri.parse('https://script.google.com/macros/s/AKfycbxlSPwbKh7pZoVEzncXvvdisbAeA59Nfhfi-q7DlsMNX7-XMCWntW891uW-H2567VO4/exec'));
+    final response = await http.get(Uri.parse(
+        'https://script.google.com/macros/s/AKfycbxlSPwbKh7pZoVEzncXvvdisbAeA59Nfhfi-q7DlsMNX7-XMCWntW891uW-H2567VO4/exec'));
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> decodedData = json.decode(response.body);

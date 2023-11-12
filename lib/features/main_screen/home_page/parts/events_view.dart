@@ -31,7 +31,9 @@ class _EventsViewState extends State<EventsView> {
                           builder: (BuildContext context) {
                             return AlertDialogForEvents(
                               text: widget.eventsList[index].text,
-                              title: widget.eventsList[index].name,
+                              title: widget.eventsList[index].title,
+                              contacts: true,
+                              date: widget.eventsList[index].date,
                             );
                           },
                         );
@@ -43,11 +45,11 @@ class _EventsViewState extends State<EventsView> {
                             width: screenWidth,
                             child: Center(
                               child: Image.network(
-                                  widget.eventsList[index].imageUrl),
+                                  widget.eventsList[index].mainImageUrl,),
                             ),
                           ),
                           TitleDataLabel(
-                            title: widget.eventsList[index].name,
+                            title: widget.eventsList[index].title,
                             side: 'left',
                             customWidth: 0.75 * screenWidth,
                           ),

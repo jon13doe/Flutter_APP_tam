@@ -22,6 +22,7 @@ export 'package:material_symbols_icons/symbols.dart';
 
 // URL luncher
 export 'package:url_launcher/url_launcher.dart';
+
 // HTTP
 export 'package:http/http.dart'; 
 
@@ -36,8 +37,3 @@ export 'package:tam_app/features/widgets/index.dart';
 
 // Provider
 export 'package:provider/provider.dart';
-
-// data
-export 'package:tam_app/features/clases/parsed_data_class.dart';
-
-export 'package:firebase_auth/firebase_auth.dart';

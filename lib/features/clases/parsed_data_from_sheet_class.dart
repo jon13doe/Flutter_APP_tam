@@ -1,6 +1,6 @@
 import 'package:tam_app/global_imports.dart';
 
-class DataList with ChangeNotifier {
+class DataFromSheet with ChangeNotifier {
   List<EventsClass> events = [];
   List<NewsClass> news = [];
   List<ShowsClass> shows = [];
@@ -17,6 +17,6 @@ class DataList with ChangeNotifier {
     shows = showsData ?? [];
     models = modelsData ?? [];
 
-    notifyListeners(); // Сповіщаємо слухачів про зміну даних
+    notifyListeners();
   }
 }

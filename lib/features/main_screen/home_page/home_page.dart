@@ -1,6 +1,5 @@
 import 'package:tam_app/global_imports.dart';
-import 'parts/events_view.dart';
-import 'parts/news_view.dart';
+import 'parts/index.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -12,7 +11,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-
     return CustomScrollView(
       slivers: [
         const SliverToBoxAdapter(
@@ -20,7 +18,7 @@ class _HomeState extends State<Home> {
             height: 8,
           ),
         ),
-        Consumer<DataList>(
+        Consumer<DataFromSheet>(
           builder: (context, dataList, child) {
             return EventsView(
               eventsList: dataList.events,
@@ -48,7 +46,7 @@ class _HomeState extends State<Home> {
             height: 8,
           ),
         ),
-        Consumer<DataList>(
+        Consumer<DataFromSheet>(
           builder: (context, dataList, child) {
             return NewsView(
               newsList: dataList.news,
@@ -56,8 +54,10 @@ class _HomeState extends State<Home> {
           },
         ),
         const SliverToBoxAdapter(
-              child: ContactsRow(withImg: true,),
-            ),
+          child: ContactsRow(
+            withImg: true,
+          ),
+        ),
       ],
     );
   }

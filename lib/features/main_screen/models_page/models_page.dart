@@ -1,3 +1,4 @@
+import 'package:tam_app/features/main_screen/models_page/zoom_photo_screen.dart';
 import 'package:tam_app/global_imports.dart';
 
 class Models extends StatelessWidget {
@@ -5,7 +6,7 @@ class Models extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final modelsList = Provider.of<DataList>(context).models;
+    final modelsList = Provider.of<DataFromSheet>(context).models;
 
     return CustomScrollView(
       slivers: [
@@ -15,9 +16,7 @@ class Models extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 Color color = index % 2 == 0 ? Colors.black : Colors.grey;
-                ModelsClass model =
-                    modelsList[index]; // Отримання конкретної моделі
-
+                ModelsClass model = modelsList[index];
                 return Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16.0,
@@ -26,111 +25,154 @@ class Models extends StatelessWidget {
                   child: Container(
                     color: color,
                     height: MediaQuery.of(context).size.width,
-                    child: Row(
-                      children: [
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Container(
-                                  color: Colors.white,
-                                  // Відображення фото з портфоліо моделі
-                                  child:
-                                      Image.network(model.portfolioPhotoUrl[0]),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Container(
-                                  color: Colors.white,
-                                  // Відображення фото з портфоліо моделі
-                                  child:
-                                      Image.network(model.portfolioPhotoUrl[1]),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Container(
-                                  color: Colors.white,
-                                  // Відображення фото з портфоліо моделі
-                                  child:
-                                      Image.network(model.portfolioPhotoUrl[2]),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                            ],
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: ListView.builder(
+                              itemCount: model.portfolioPhotoUrl.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ZoomPhotoScreen(
+                                          photoUrl:
+                                              model.portfolioPhotoUrl[index],
+                                          tag:
+                                              'portfolio_photo_${model.name}_$index',
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Hero(
+                                    tag: 'portfolio_photo_${model.name}_$index',
+                                    child: Container(
+                                      color: color,
+                                      margin:
+                                          const EdgeInsets.only(bottom: 8.0),
+                                      child: Image.network(
+                                        model.portfolioPhotoUrl[index],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Expanded(
-                          flex: 3,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              Expanded(
-                                flex: 3,
-                                child: Container(
-                                  color: Colors.white,
-                                  // Відображення головного фото моделі
-                                  child: Image.network(model.mainPhotoUrl),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Container(
-                                  color: Colors.white,
-                                  child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text('Name: ${model.name}'),
-                                        Text('Age: ${calculateAge(model.dateOfBirth)}'),
-                                        Text('Hight: ${model.height}'),
-                                        Text('Weight: ${model.weight}'),
-                                        Text('Hair color: ${model.hairColor}'),
-                                      ],
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Expanded(
+                            flex: 3,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Expanded(
+                                  flex: 3,
+                                  child: Hero(
+                                    tag:
+                                        'main_photo_${model.name}_${model.dateOfBirth}',
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ZoomPhotoScreen(
+                                              photoUrl: model.mainPhotoUrl,
+                                              tag:
+                                                  'main_photo_${model.name}_${model.dateOfBirth}',
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        color: color,
+                                        child: Image.network(
+                                          model.mainPhotoUrl,
+                                          fit: BoxFit.fitHeight,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                            ],
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    color: Colors.white,
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Name: ${model.name}',
+                                              style: const TextStyle(
+                                                fontSize: 24,
+                                              ),
+                                            ),
+                                            Text(
+                                                'Age: ${calculateAge(model.dateOfBirth)}'),
+                                            Row(
+                                              children: [
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                          'Hight: ${model.height}'),
+                                                      Text(
+                                                          'Weight: ${model.weight}'),
+                                                    ],
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 8,
+                                                ),
+                                                Expanded(
+                                                  flex: 2,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                          'Hair color: ${model.hairColor}'),
+                                                      Text(
+                                                          'Hair color: ${model.eyeColor}'),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 );
@@ -140,8 +182,10 @@ class Models extends StatelessWidget {
           ),
         ),
         const SliverToBoxAdapter(
-              child: ContactsRow(withImg: true,),
-            ),
+          child: ContactsRow(
+            withImg: true,
+          ),
+        ),
       ],
     );
   }

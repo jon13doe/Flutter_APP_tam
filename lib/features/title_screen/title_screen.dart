@@ -18,7 +18,7 @@ class _TitleScreenState extends State<TitleScreen> {
     try {
       final data = await SheetDataApi.fetchDataFromGoogleScript();
 
-      final dataProvider = Provider.of<DataList>(context, listen: false);
+      final dataProvider = Provider.of<DataFromSheet>(context, listen: false);
 
       dataProvider.setParsedData(
         eventsData: data['eventList']?.cast<EventsClass>(),
@@ -30,7 +30,7 @@ class _TitleScreenState extends State<TitleScreen> {
       context.go('/');
 
     } catch (e) {
-      print('Помилка під час отримання даних: $e');
+      print('Error: $e');
     }
   }
 
@@ -52,40 +52,3 @@ class _TitleScreenState extends State<TitleScreen> {
     );
   }
 }
-
-
-// class TitleScreen extends StatefulWidget {
-//   const TitleScreen({super.key});
-
-//   @override
-//   State<TitleScreen> createState() => _TitleScreenState();
-// }
-
-// class _TitleScreenState extends State<TitleScreen> {
-//   @override
-//   void initState() {
-//     super.initState();
-//     Future.delayed(
-//       const Duration(seconds: 3),
-//       () => context.go('/'),
-//     );
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Stack(
-//         children: [
-//           Positioned(
-//             left: 0,
-//             right: 0,
-//             bottom: 32,
-//             child: Image.asset(
-//               'assets/logo/logo_white.png',
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }

@@ -1,7 +1,7 @@
 import 'package:tam_app/global_imports.dart';
 
 class TAMBottomNavigationBar extends StatefulWidget {
-const TAMBottomNavigationBar({super.key});
+  const TAMBottomNavigationBar({super.key});
 
   @override
   State<TAMBottomNavigationBar> createState() => _TAMBottomNavigationBarState();
@@ -12,7 +12,6 @@ class _TAMBottomNavigationBarState extends State<TAMBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-
     return BottomNavigationBar(
       currentIndex: _currentPageIndex,
       onTap: (int index) {
@@ -20,13 +19,13 @@ class _TAMBottomNavigationBarState extends State<TAMBottomNavigationBar> {
           _currentPageIndex = index;
           switch (index) {
             case 1:
-              context.go('/models');
+              context.go('/shows');
               break;
             case 2:
-              context.go('/show');
+              context.go('/models');
               break;
             case 3:
-              context.go('/casting');
+              context.go('/school');
               break;
             default:
               context.go('/');
@@ -40,16 +39,16 @@ class _TAMBottomNavigationBarState extends State<TAMBottomNavigationBar> {
           label: 'Home',
         ),
         BottomNavigationBarItem(
+          icon: Icon(Symbols.podiatry),
+          label: 'Shows',
+        ),
+        BottomNavigationBarItem(
           icon: Icon(Icons.diamond),
           label: 'Models',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Symbols.podiatry),
-          label: 'Show',
-        ),
-        BottomNavigationBarItem(
           icon: Icon(Icons.edit_note),
-          label: 'Casting',
+          label: 'School',
         ),
       ],
     );
